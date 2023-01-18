@@ -1,10 +1,16 @@
 class Solution:
     def sortPeople(self, names: List[str], heights: List[int]) -> List[str]:
-        
-    #Bubble Sorting
-        for i in range(len(heights)):
-            for j in range(len(heights)-1):
-                if heights[j]<heights[j+1]:
-                    heights[j],heights[j+1]=heights[j+1],heights[j]
-                    names[j],names[j+1]=names[j+1],names[j]
+        #Insertion Sorting
+        for i in range(1,len(heights)):
+            key_height = heights[i]
+            key_names = names[i]
+            j = i-1
+            while key_height > heights[j] and j>=0:
+                heights[j+1] = heights[j]
+                names[j+1] = names[j]
+                j -= 1
+            heights[j+1] = key_height
+            names[j+1] = key_names
+            
         return names
+                
