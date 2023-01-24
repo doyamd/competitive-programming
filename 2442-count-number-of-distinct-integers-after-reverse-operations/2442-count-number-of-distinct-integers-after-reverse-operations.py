@@ -4,7 +4,7 @@ class Solution:
         for i in range(length):
             x = str(nums[i])
             reversed(x)
-            x = int("".join(reversed(x)))
+            x = int(x[::-1])
             nums.append(x)
         distnict = set(nums)
         return len(distnict)
