@@ -4,7 +4,7 @@
 #         self.val = val
 #         self.next = next
 
-    #None<- 1 <- 2 <- 3  4 -> 5 
+    #None<- 1 <- 2 <- 3 <- 4 <- 5 
 
 class Solution:
     def reverseList(self, head: Optional[ListNode]) -> Optional[ListNode]:
