@@ -9,9 +9,8 @@ class Solution:
             if i >= j: 
                 return 
             s[i], s[j] = s[j], s[i]
-            i += 1
-            j -= 1
-            rev(i,j)
+            
+            rev(i+1,j-1)
         rev(i,j)
             
             
