@@ -2,27 +2,37 @@ class Solution:
     def checkIfPrerequisite(self, n: int, pre: List[List[int]], queries: List[List[int]]) -> List[bool]:
         if not pre:
             return [False]*n
-        conect = defaultdict(list)
+        d = defaultdict(set)
+        graph = defaultdict(list)
         visited = set()
         for x, y in pre:
-            conect[x].append(y)
-        
-        ans = [[] for _ in range(n)]
-        answer = [False for _ in range(len(queries))]
-        res = defaultdict(list)
-        
-        def dfs(node,x):
-            for i in conect[node]:
-                if ans[i] and ans[i][-1] == x: continue
+            graph[y].append(x)
+        ans = []
+        for q in queries:
+            end,start = q
+            heap = [(start)]
+            heapq.heapify(heap)
+            visited = set()
+            found = False
+            while heap:
+                node = heapq.heappop(heap)
+                if node in visited:
+                    continue
+                visited.add(node)
+                for neig in graph[node]:
+                    heapq.heappush(heap,(neig))
+                if end not in d[start]:
+                    d[start].add(node)
+                else:
+                    found = True
+                    break
 
-                ans[i].append(x)
-                dfs(i,x)           
+            if found:
+                ans.append(True)
+            elif end in d[start]:
+                ans.append(True)
+            else:
+                ans.append(False)
             
-        for k in range(n):
-           dfs(k,k)
-        
-        for i in range(len(queries)):
-            if queries[i][0] in ans[queries[i][1]]:
-                answer[i] = True
-
-        return answer
+            
+        return ans
